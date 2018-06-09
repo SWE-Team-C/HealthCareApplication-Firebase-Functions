@@ -17,6 +17,8 @@ exports.sendChatNotification = functions.database.ref('/chats/{roomKey}/{chatKey
 
     return getChatRoomPromise.then(result => {
       const chatRoom = result.val();
+      chatRoom.latestMessage = value.message;
+      result.ref.set(chatRoom);
       return chatRoom;
     }).then((chatRoom) => {
       let senderType;
